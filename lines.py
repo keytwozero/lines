@@ -1,18 +1,18 @@
 walls = False
 draw_bridges = False
-
+player_color = [6,5] # Head, Lines
+walls_colors = [4,13] # Centers, Walls
 import pyxel
 from random import randint
 w, h = 33, 33
-ww = w + (w - 1)
-hw = h + (h - 1)
+ww, hw = w + (w - 1), h + (h - 1)
 regeneration = 2
 hp_max = 5
 chance_max = 20
 class Windower:
 	def __init__(self):
 		self.restart()
-		pyxel.init(ww, hw, 'Lines', fps=144)
+		pyxel.init(ww, hw, caption='Lines', fps=144)
 		pyxel.run(self.update, self.draw)
 	def restart(self):
 		self.hp = hp_max
@@ -54,7 +54,7 @@ class Windower:
 				wall = True
 		if not can:
 			self.death = True
-		if can < regeneration+1:
+		if can < regeneration + 1:
 			if not wall:
 				self.hp = hp_max
 			else:
@@ -88,33 +88,33 @@ class Windower:
 				if draw_bridges:
 					pyxel.pset(j*2,i*2,13)
 				if self.field[i][j][0] == 3:
-					pyxel.pset(j*2,i*2-1,7)
+					pyxel.pset(j*2,i*2-1,walls_colors[1])
 					wall = True
 				if self.field[i][j][1] == 3:
-					pyxel.pset((j*2)-1,i*2,7)
+					pyxel.pset((j*2)-1,i*2,walls_colors[1])
 					wall = True
 				if self.field[i][j][2] == 3:
-					pyxel.pset((j*2)+1,i*2,7)
+					pyxel.pset((j*2)+1,i*2,walls_colors[1])
 					wall = True
 				if self.field[i][j][3] == 3:
-					pyxel.pset(j*2,i*2+1,7)
+					pyxel.pset(j*2,i*2+1,walls_colors[1])
 					wall = True
 				if wall:
-					pyxel.pset(j*2,i*2,12)
+					pyxel.pset(j*2,i*2,walls_colors[0])
 				if self.field[i][j][0] == 1:
-					pyxel.pset(j*2,i*2-1,8)
+					pyxel.pset(j*2,i*2-1,player_color[1])
 					have = True
 				if self.field[i][j][1] == 1:
-					pyxel.pset((j*2)-1,i*2,8)
+					pyxel.pset((j*2)-1,i*2,player_color[1])
 					have = True
 				if self.field[i][j][2] == 1:
-					pyxel.pset((j*2)+1,i*2,8)
+					pyxel.pset((j*2)+1,i*2,player_color[1])
 					have = True
 				if self.field[i][j][3] == 1:
-					pyxel.pset(j*2,i*2+1,8)
+					pyxel.pset(j*2,i*2+1,player_color[1])
 					have = True
 				if have:
-					pyxel.pset(j*2,i*2,8)
+					pyxel.pset(j*2,i*2,player_color[1])
 		if not self.death:
-			pyxel.pset(self.pose[1]*2,self.pose[0]*2,10)
+			pyxel.pset(self.pose[1]*2,self.pose[0]*2,player_color[0])
 Windower()
