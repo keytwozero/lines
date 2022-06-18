@@ -12,7 +12,7 @@ chance_max = 20
 class Windower:
 	def __init__(self):
 		self.restart()
-		pyxel.init(ww, hw, caption='Lines', fps=144)
+		pyxel.init(ww, hw, fps=144)
 		pyxel.run(self.update, self.draw)
 	def restart(self):
 		self.hp = hp_max
